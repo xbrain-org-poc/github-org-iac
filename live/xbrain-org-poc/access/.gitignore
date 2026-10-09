@@ -1,0 +1,14 @@
+# Local tooling/config and unreviewed evidence for this Terraform root.
+.tools/
+docs/evidence/local/
+*.plan
+*.log
+*.key
+*.p12
+*.pfx
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+.terraformrc
+terraform.rc

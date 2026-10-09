@@ -1,0 +1,28 @@
+# Copy to terraform.tfvars; replace both placeholders before planning.
+# Use a SANDBOX organization and a user who has accepted its invitation.
+github_org = "your-sandbox-org"
+
+teams = {
+  devops = {
+    name        = "poc-devops"
+    description = "Task B sandbox team"
+    privacy     = "closed"
+    members = {
+      "existing-test-user" = "member"
+    }
+  }
+
+  # Optional: test the same user in a second independent team.
+  # qa = {
+  #   name = "poc-qa"
+  #   members = {
+  #     "existing-test-user" = "member"
+  #   }
+  # }
+
+  # Optional: test parent/child ordering. Both teams must be closed.
+  # tooling = {
+  #   name       = "poc-tooling"
+  #   parent_key = "devops"
+  # }
+}
