@@ -7,7 +7,7 @@ variable "organization" {
 variable "demo_repository_description" {
   description = "Description of the repository used to demonstrate IaC management."
   type        = string
-  default     = "PoC thành công: repository và ruleset được quản lý bằng Terraform."
+  default     = "Demo trực tiếp: repository-demo được quản lý bằng Terraform."
 }
 
 variable "repository_name" {
