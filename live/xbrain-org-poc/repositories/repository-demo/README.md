@@ -22,6 +22,7 @@ Thư mục này là Terraform root và state riêng cho repo public [repository-
 | Phát hiện và khôi phục drift | Tắt Issues ngoài Terraform; plan thấy `false -> true`; apply bật lại; plan cuối `No changes` | [Drift plan](docs/evidence/demo/11-drift-plan.txt) · [Apply](docs/evidence/demo/13-drift-apply.txt) · [Plan cuối](docs/evidence/demo/27-post-merge-plan.txt) |
 | Ruleset bảo vệ `main` | Active, yêu cầu PR và 1 approval, chỉ squash, không có bypass | [Rule từ GitHub API](docs/evidence/demo/05-main-rules.json) · [Ảnh cấu hình](docs/evidence/demo/22-ruleset-review.jpg) |
 | Kiểm tra hành vi rule | Ghi trực tiếp `main` bị từ chối HTTP 409; [PR demo #1](https://github.com/xbrain-org-poc/repository-demo/pull/1) bị chặn trước review, sau đó `hofang42` approve và merge; nhánh demo được xóa | [Lỗi direct push](docs/evidence/demo/17-direct-main-rejected.txt) · [PR trước review](docs/evidence/demo/16-pr-review-status.json) · [PR đã merge](docs/evidence/demo/23-pr-merged.json) |
+| Mở rộng cấu hình repo (09/10/2026) | Thêm topics `github-iac`, `poc`, `terraform`; Actions chỉ cho phép GitHub-owned actions; tạo environment `dev` với variable không nhạy cảm `POC_ENVIRONMENT=dev`. Apply `3 added, 1 changed, 0 destroyed`; plan sau apply không còn thay đổi | [Plan](docs/evidence/extension-2026-10-09/plan.txt) · [GitHub API](docs/evidence/extension-2026-10-09/) · [Plan sau apply](docs/evidence/extension-2026-10-09/post-apply-plan.txt) |
 
 ## Ảnh bằng chứng chính
 
@@ -48,11 +49,12 @@ Thư mục này là Terraform root và state riêng cho repo public [repository-
 ## Mã nguồn
 
 - [`main.tf`](main.tf): cấu hình repo demo và ruleset được kiểm chứng.
+- [`actions.tf`](actions.tf): quyền Actions, environment `dev` và variable mẫu.
 - [`provider.tf`](provider.tf): Terraform và GitHub provider.
 - [`variables.tf`](variables.tf), [`outputs.tf`](outputs.tf): tham số và URL đầu ra.
-- [Hướng dẫn chạy/import state](docs/huong-dan-chay.md); [toàn bộ evidence](docs/evidence/demo/).
+- [Hướng dẫn chạy/import state](docs/huong-dan-chay.md); [evidence ban đầu](docs/evidence/demo/) và [evidence mở rộng](docs/evidence/extension-2026-10-09/).
 
-State và binary plan lưu local, không commit. Hai resource của repo này đã được chuyển từ state PoC dùng chung sang state riêng trong thư mục này; bản clone mới phải import các resource đã tồn tại theo [hướng dẫn](docs/huong-dan-chay.md) trước khi plan/apply.
+State và binary plan lưu local, không commit. Repository và ruleset ban đầu đã được chuyển từ state PoC dùng chung sang state riêng trong thư mục này; các resource Actions/environment được thêm sau. Bản clone mới phải import mọi resource đã tồn tại theo [hướng dẫn](docs/huong-dan-chay.md) trước khi plan/apply.
 
 ## Giới hạn của GitHub Free và PoC
 
@@ -63,4 +65,4 @@ State và binary plan lưu local, không commit. Hai resource của repo này đ
 
 Nguồn: [GitHub Docs về repository rulesets](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets) và [organization rulesets](https://docs.github.com/en/organizations/managing-organization-settings/creating-rulesets-for-repositories-in-your-organization).
 
-Trong phạm vi PoC, chưa thử hành vi hủy approval cũ khi push commit mới dù rule đã được cấu hình. Remote state và pipeline plan/apply tự động cũng chưa triển khai; đây là giới hạn phạm vi thực hiện, không phải giới hạn của GitHub Free.
+Trong phạm vi PoC, chưa thử hành vi hủy approval cũ khi push commit mới dù rule đã được cấu hình. Environment `dev` chưa có workflow deployment hoặc điều kiện phê duyệt deployment; variable mẫu không phải secret. Topics và quyền Actions đã được đối chiếu qua API, chưa chạy workflow để thử allowlist. Remote state và pipeline plan/apply tự động cũng chưa triển khai; đây là giới hạn phạm vi thực hiện, không phải giới hạn của GitHub Free.

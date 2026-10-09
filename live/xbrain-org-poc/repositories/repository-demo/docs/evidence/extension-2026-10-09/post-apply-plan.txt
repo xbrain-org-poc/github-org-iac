@@ -1,0 +1,10 @@
+github_repository.demo: Refreshing state... [id=repository-demo]
+github_actions_repository_permissions.demo: Refreshing state... [id=repository-demo]
+github_repository_environment.dev: Refreshing state... [id=repository-demo:dev]
+github_repository_ruleset.demo: Refreshing state... [id=24239438]
+github_actions_environment_variable.dev_poc_environment: Refreshing state... [id=repository-demo:dev:POC_ENVIRONMENT]
+
+No changes. Your infrastructure matches the configuration.
+
+Terraform has compared your real infrastructure against your configuration
+and found no differences, so no changes are needed.

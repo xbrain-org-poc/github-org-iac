@@ -18,11 +18,14 @@ Không lưu token, state hoặc binary plan vào Git. `.gitignore` loại các f
 
 ## Clone mới và import state
 
-Repo và ruleset đã tồn tại trên GitHub. Kiểm tra `terraform state list`, chỉ import resource chưa có trong state. Không chạy apply với state rỗng để tạo lại chúng.
+Repo, ruleset, Actions permissions, environment và variable đã tồn tại trên GitHub. Kiểm tra `terraform state list`, chỉ import resource chưa có trong state. Không chạy apply với state rỗng để tạo lại chúng.
 
 ```powershell
 terraform import github_repository.demo repository-demo
 terraform import github_repository_ruleset.demo 'repository-demo:24239438'
+terraform import github_actions_repository_permissions.demo repository-demo
+terraform import github_repository_environment.dev 'repository-demo:dev'
+terraform import github_actions_environment_variable.dev_poc_environment 'repository-demo:dev:POC_ENVIRONMENT'
 terraform plan
 ```
 

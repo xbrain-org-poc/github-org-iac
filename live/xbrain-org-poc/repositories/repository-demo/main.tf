@@ -4,6 +4,7 @@ resource "github_repository" "demo" {
   description = var.demo_repository_description
   visibility  = "public"
   auto_init   = true
+  topics      = ["github-iac", "poc", "terraform"]
 
   has_issues   = true
   has_projects = false

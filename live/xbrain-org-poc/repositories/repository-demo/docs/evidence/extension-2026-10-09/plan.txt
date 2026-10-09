@@ -1,0 +1,59 @@
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  + create
+  ~ update in-place
+
+Terraform will perform the following actions:
+
+  # github_actions_environment_variable.dev_poc_environment will be created
+  + resource "github_actions_environment_variable" "dev_poc_environment" {
+      + created_at    = (known after apply)
+      + environment   = "dev"
+      + id            = (known after apply)
+      + repository    = "repository-demo"
+      + repository_id = (known after apply)
+      + updated_at    = (known after apply)
+      + value         = "dev"
+      + variable_name = "POC_ENVIRONMENT"
+    }
+
+  # github_actions_repository_permissions.demo will be created
+  + resource "github_actions_repository_permissions" "demo" {
+      + allowed_actions      = "selected"
+      + enabled              = true
+      + id                   = (known after apply)
+      + repository           = "repository-demo"
+      + sha_pinning_required = (known after apply)
+
+      + allowed_actions_config {
+          + github_owned_allowed = true
+          + verified_allowed     = false
+        }
+    }
+
+  # github_repository.demo will be updated in-place
+  ~ resource "github_repository" "demo" {
+        id                                      = "repository-demo"
+        name                                    = "repository-demo"
+      ~ topics                                  = [
+          + "github-iac",
+          + "poc",
+          + "terraform",
+        ]
+        # (40 unchanged attributes hidden)
+
+        # (1 unchanged block hidden)
+    }
+
+  # github_repository_environment.dev will be created
+  + resource "github_repository_environment" "dev" {
+      + can_admins_bypass   = true
+      + environment         = "dev"
+      + id                  = (known after apply)
+      + prevent_self_review = false
+      + repository          = "repository-demo"
+      + repository_id       = (known after apply)
+    }
+
+Plan: 3 to add, 1 to change, 0 to destroy.
