@@ -1,0 +1,10 @@
+﻿{
+    "team_id":  19806617,
+    "name":  "poc-infra-maintainers",
+    "slug":  "poc-infra-maintainers",
+    "description":  "Maintains shared infrastructure in the Task B sandbox",
+    "privacy":  "closed",
+    "notification_setting":  "notifications_disabled",
+    "owner_membership_state":  "active",
+    "owner_team_role":  "maintainer"
+}

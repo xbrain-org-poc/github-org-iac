@@ -1,0 +1,13 @@
+data.github_membership.existing["phuc776"]: Reading...
+data.github_membership.existing["phuc-do-v2"]: Reading...
+github_team.root["devops"]: Refreshing state... [id=19806617]
+data.github_membership.existing["phuc-do-v2"]: Read complete after 0s [id=xbrain-org-poc:phuc-do-v2]
+
+Planning failed. Terraform encountered an error while generating this plan.
+
+
+Error: GET https://api.github.com/orgs/xbrain-org-poc/memberships/phuc776: 404 Not Found []
+
+  with data.github_membership.existing["phuc776"],
+  on team-memberships.tf line 17, in data "github_membership" "existing":
+  17: data "github_membership" "existing" {

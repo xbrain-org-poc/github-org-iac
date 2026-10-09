@@ -1,0 +1,59 @@
+﻿github_team.root["devops"]: Refreshing state... [id=19806617]
+github_team_membership.member["devops:phuc-do-v2"]: Refreshing state... [id=19806617:phuc-do-v2]
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  - destroy
+
+Terraform will perform the following actions:
+
+  # github_team.root["devops"] will be destroyed
+  # (because key ["devops"] is not in for_each map)
+  - resource "github_team" "root" {
+      - create_default_maintainer = false -> null
+      - description               = "Maintains shared infrastructure in the Task B sandbox" -> null
+      - etag                      = "W/\"bfb2428dba00cd73647154d0a1e9baf2893d0c947e55153d8dadfdb5c66ff92b\"" -> null
+      - id                        = "19806617" -> null
+      - members_count             = 1 -> null
+      - name                      = "poc-infra-maintainers" -> null
+      - node_id                   = "T_kwDOFAZSuM4BLjmZ" -> null
+      - notification_setting      = "notifications_disabled" -> null
+      - privacy                   = "closed" -> null
+      - slug                      = "poc-infra-maintainers" -> null
+        # (3 unchanged attributes hidden)
+    }
+
+  # github_team_membership.member["devops:phuc-do-v2"] will be destroyed
+  # (because key ["devops:phuc-do-v2"] is not in for_each map)
+  - resource "github_team_membership" "member" {
+      - etag     = "W/\"6a1bcf387370add8fc9f026abda66b66296745d9fe75c1d426529b7a246fc4b6\"" -> null
+      - id       = "19806617:phuc-do-v2" -> null
+      - role     = "maintainer" -> null
+      - team_id  = "19806617" -> null
+      - username = "phuc-do-v2" -> null
+    }
+
+Plan: 0 to add, 0 to change, 2 to destroy.
+
+Changes to Outputs:
+  ~ team_memberships = {
+      - "devops:phuc-do-v2" = {
+          - role     = "maintainer"
+          - team_id  = "19806617"
+          - username = "phuc-do-v2"
+        }
+    }
+  ~ teams            = {
+      - devops = {
+          - id   = "19806617"
+          - slug = "poc-infra-maintainers"
+          - url  = "https://github.com/orgs/xbrain-org-poc/teams/poc-infra-maintainers"
+        }
+    }
+
+─────────────────────────────────────────────────────────────────────────────
+
+Saved the plan to: task-b-delete-final.tfplan
+
+To perform exactly these actions, run the following command to apply:
+    terraform apply "task-b-delete-final.tfplan"
