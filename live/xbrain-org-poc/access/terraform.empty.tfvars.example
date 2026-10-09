@@ -1,0 +1,5 @@
+# Final desired configuration after the original PoC cleanup.
+# If this state owns teams/memberships, this proposes their deletion.
+# Review the actual plan before applying.
+github_org = "xbrain-org-poc"
+teams      = {}

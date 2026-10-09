@@ -2,7 +2,7 @@
 
 ## Mục tiêu và trạng thái
 
-`xbrain-org-poc` là sandbox riêng để chứng minh luồng. Chưa có tên org công ty, inventory repo, danh sách owner/team, IdP hay backend state được phê duyệt. Vì vậy blueprint trong repo là **thiết kế có mã tham chiếu**; không đại diện cho cấu hình đã áp dụng ở công ty.
+`xbrain-org-poc` là sandbox riêng để chứng minh luồng. PoC Team đã được tích hợp vào `access/`, nhưng phần cấp quyền team vào repo chưa có. Chưa có tên org công ty, inventory repo, danh sách owner/team, IdP hay backend state được phê duyệt. Vì vậy blueprint trong repo là **thiết kế có mã tham chiếu**; không đại diện cho cấu hình đã áp dụng ở công ty.
 
 ## Ranh giới quản lý
 
