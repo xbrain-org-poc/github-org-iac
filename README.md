@@ -13,7 +13,7 @@ Repository tập trung mã Terraform cho sandbox GitHub Organization `xbrain-org
 
 ## Kết quả đã chứng minh
 
-- **Repository:** Terraform tạo và cập nhật [`repository-demo`](https://github.com/xbrain-org-poc/repository-demo), phát hiện và khôi phục drift, áp dụng ruleset yêu cầu PR và một approval. [Code, ảnh và log](live/xbrain-org-poc/repositories/repository-demo/README.md).
+- **Repository:** Terraform tạo và cập nhật [`repository-demo`](https://github.com/xbrain-org-poc/repository-demo), phát hiện và khôi phục drift, áp dụng ruleset yêu cầu PR và một approval. PoC mở rộng đã apply topics, quyền Actions và environment `dev` với variable mẫu. [Code, ảnh và log](live/xbrain-org-poc/repositories/repository-demo/README.md).
 - **Member:** Terraform đã thử invitation, thay đổi role, drift, import và xóa thành viên thử nghiệm. State cuối đã dọn sạch. [Code, ảnh và log](live/xbrain-org-poc/identity/README.md).
 - **Team/access:** Terraform đã tạo/cập nhật/xóa team và thêm/đổi role/xóa direct team membership; org membership được giữ nguyên khi xóa team membership. Plan sau từng bước hội tụ; [code, tests và evidence lịch sử](live/xbrain-org-poc/access/README.md). Team-to-repository permission, drift/import/nested-team live tests còn ngoài phạm vi đã chứng minh.
 - **Org ruleset:** Đã thêm [cấu hình và kết quả thử](live/xbrain-org-poc/org-policies/README.md) cho hai repo. GitHub từ chối request tạo ruleset; gói Free hiện tại không hỗ trợ tính năng này.
