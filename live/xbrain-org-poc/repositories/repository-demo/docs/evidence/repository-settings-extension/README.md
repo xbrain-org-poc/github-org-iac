@@ -1,4 +1,4 @@
-# Bằng chứng mở rộng repository-demo — 09/10/2026
+# Bằng chứng mở rộng repository-demo
 
 Terraform plan dự kiến thêm 3 resource, cập nhật topics trên repo hiện hữu và không xóa resource: [plan.txt](plan.txt). Lệnh apply hoàn tất với kết quả `3 added, 1 changed, 0 destroyed`.
 
