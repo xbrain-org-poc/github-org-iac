@@ -1,0 +1,12 @@
+﻿data.github_membership.existing["phuc776"]: Reading...
+data.github_membership.existing["phuc-do-v2"]: Reading...
+github_team.root["devops"]: Refreshing state... [id=19806617]
+data.github_membership.existing["phuc776"]: Read complete after 0s [id=xbrain-org-poc:Phuc776]
+data.github_membership.existing["phuc-do-v2"]: Read complete after 1s [id=xbrain-org-poc:phuc-do-v2]
+github_team_membership.member["devops:phuc776"]: Refreshing state... [id=19806617:Phuc776]
+github_team_membership.member["devops:phuc-do-v2"]: Refreshing state... [id=19806617:phuc-do-v2]
+
+No changes. Your infrastructure matches the configuration.
+
+Terraform has compared your real infrastructure against your configuration
+and found no differences, so no changes are needed.

@@ -16,7 +16,7 @@ Mã và báo cáo được chuyển từ [github-org-iac-po](https://github.com/
 | Delete team | Review plan `0 add / 0 change / 2 destroy`, xóa owner membership và team |
 | Hội tụ và cleanup | Plan sau từng bước không đổi; state cuối trống; team API trả `404` |
 
-[Evidence Jira](docs/jira-task-b-live-evidence-vi.md) ghi các trích đoạn plan/apply và kết quả API/state. [Báo cáo phạm vi](docs/task-b-scope-report-vi.md) phân biệt live evidence với mocked tests và phần chưa thử; [kết quả chi tiết](docs/team-poc-results.md) giữ lịch sử PoC. Đây là evidence lịch sử từ repo nguồn, không phải một lần apply mới trong repo tổng hợp. Raw state, binary plan và log chưa rà soát không được bàn giao qua Git.
+[Bộ evidence](docs/evidence/README.md) chứa log plan/apply/no-change và các summary API/state đã kiểm tra. [Evidence Jira](docs/jira-task-b-live-evidence-vi.md) ghi các trích đoạn cùng kết quả xác minh. [Báo cáo phạm vi](docs/task-b-scope-report-vi.md) phân biệt live evidence với mocked tests và phần chưa thử; [kết quả chi tiết](docs/team-poc-results.md) giữ lịch sử PoC. Đây là evidence lịch sử từ repo nguồn, không phải một lần apply mới trong repo tổng hợp. Raw state, binary plan và log chưa rà soát không được bàn giao qua Git.
 
 ## Ranh giới với hai phần còn lại
 

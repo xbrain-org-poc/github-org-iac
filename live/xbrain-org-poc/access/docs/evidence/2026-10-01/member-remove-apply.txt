@@ -1,0 +1,21 @@
+﻿github_team_membership.member["devops:phuc776"]: Destroying... [id=19806617:Phuc776]
+github_team_membership.member["devops:phuc776"]: Destruction complete after 1s
+
+Apply complete! Resources: 0 added, 0 changed, 1 destroyed.
+
+Outputs:
+
+team_memberships = {
+  "devops:phuc-do-v2" = {
+    "role" = "maintainer"
+    "team_id" = "19806617"
+    "username" = "phuc-do-v2"
+  }
+}
+teams = {
+  "devops" = {
+    "id" = "19806617"
+    "slug" = "poc-infra-maintainers"
+    "url" = "https://github.com/orgs/xbrain-org-poc/teams/poc-infra-maintainers"
+  }
+}

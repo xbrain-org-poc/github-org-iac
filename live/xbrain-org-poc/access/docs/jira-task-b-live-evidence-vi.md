@@ -8,6 +8,8 @@ Terraform: `1.16.4`
 
 GitHub Provider: `integrations/github 6.13.0`
 
+[Log lịch sử và summary API/state](evidence/README.md) được bổ sung khi bàn giao vào repo tổng hợp; không chạy apply mới. Evidence index ghi rõ các log/ảnh không có trong bộ local còn lưu.
+
 ## Kết quả
 
 | Flow | Kết quả | Evidence chính |
