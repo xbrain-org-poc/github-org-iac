@@ -2,9 +2,9 @@
 
 **Organization:** [xbrain-org-poc](https://github.com/xbrain-org-poc) · **Ngày kiểm chứng:** 30/09/2026 · **Gói:** GitHub Free
 
-Mã Terraform và evidence được chuyển từ repo PoC [iac-repository-management-poc](https://github.com/xbrain-org-poc/iac-repository-management-poc) vào thư mục này. Terraform đã tạo và quản lý repo public [repository-demo](https://github.com/xbrain-org-poc/repository-demo). Organization được tạo thủ công; ruleset được áp dụng ở cấp repository.
+Thư mục này là Terraform root và state riêng cho repo public [repository-demo](https://github.com/xbrain-org-poc/repository-demo). Terraform đã tạo và quản lý repo này; organization được tạo thủ công và ruleset được áp dụng ở cấp repository. Evidence PoC ban đầu được giữ cùng cấu hình.
 
-## PoC này sẽ làm gì?
+## Phạm vi PoC đã thực hiện
 
 1. Khai báo repo demo, các thiết lập và ruleset bảo vệ `main` bằng Terraform; chạy `plan` và `apply` để tạo trên GitHub.
 2. Sửa mô tả repo trong code và apply để chứng minh có thể cập nhật bằng IaC.
@@ -47,12 +47,12 @@ Mã Terraform và evidence được chuyển từ repo PoC [iac-repository-manag
 
 ## Mã nguồn
 
-- [`main.tf`](main.tf): cấu hình repo chứa IaC và ruleset của repo này.
-- [`demo.tf`](demo.tf): repo demo và ruleset được kiểm chứng.
+- [`main.tf`](main.tf): cấu hình repo demo và ruleset được kiểm chứng.
+- [`provider.tf`](provider.tf): Terraform và GitHub provider.
 - [`variables.tf`](variables.tf), [`outputs.tf`](outputs.tf): tham số và URL đầu ra.
 - [Hướng dẫn chạy/import state](docs/huong-dan-chay.md); [toàn bộ evidence](docs/evidence/demo/).
 
-State và binary plan lưu local, không commit. State hiện tại được chép vào đúng thư mục này khi tái cấu trúc; bản clone mới phải import các resource đã tồn tại theo [hướng dẫn](docs/huong-dan-chay.md) trước khi plan/apply.
+State và binary plan lưu local, không commit. Hai resource của repo này đã được chuyển từ state PoC dùng chung sang state riêng trong thư mục này; bản clone mới phải import các resource đã tồn tại theo [hướng dẫn](docs/huong-dan-chay.md) trước khi plan/apply.
 
 ## Giới hạn của GitHub Free và PoC
 

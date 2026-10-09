@@ -1,0 +1,8 @@
+# Reference values only. Copy this root to live/<org>/repositories/<repo-name>/.
+organization = "ORG_DICH"
+
+repository = {
+  name        = "example-service"
+  description = "Example repository"
+  visibility  = "private"
+}
