@@ -115,6 +115,14 @@ def github_list(cfg, path):
         page += 1
 
 
+def require_actor_unmanaged(cfg):
+    # Removing the PAT owner from members would remove the Terraform operator from the org.
+    _, actor = github_get(cfg, "user")
+    if actor["login"].lower() in {username.lower() for username in cfg["members"]}:
+        raise RuntimeError("PAT owner is in members; keep the Terraform operator outside this state.")
+    return actor
+
+
 def verify(cfg, username, expected, role, directory):
     if not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9-]*", username):
         raise RuntimeError("Invalid username")
@@ -187,7 +195,7 @@ def main():
     if args.command == "preflight":
         if not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9-]*", args.username):
             raise RuntimeError("Invalid username")
-        _, actor = github_get(cfg, "user")
+        actor = require_actor_unmanaged(cfg)
         _, target = github_get(cfg, f"users/{args.username}")
         _, membership = github_get(cfg, f"orgs/{cfg['organization']}/memberships/{actor['login']}")
         result = {"actor": actor["login"], "target": target["login"],
@@ -202,6 +210,7 @@ def main():
     elif args.command == "verify":
         verify(cfg, args.username, args.state, args.role, directory)
     elif args.command == "plan":
+        require_actor_unmanaged(cfg)
         flags = ["-refresh-only"] if args.refresh_only else []
         path = directory / "change.tfplan"
         _, code = run_tf(["plan", "-input=false", "-no-color", "-detailed-exitcode",

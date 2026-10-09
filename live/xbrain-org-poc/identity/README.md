@@ -35,6 +35,31 @@ python3 scripts/lifecycle.py final-remove
 
 Hai lệnh cuối là kịch bản live cố định cho org/username trong kết quả PoC; đừng chạy vào org khác. Chi tiết giới hạn, auth và state behavior có trong [`evidence/README.md`](evidence/README.md).
 
+## Ranh giới với các phạm vi khác
+
+`identity/` là state duy nhất có `resource "github_membership"`: ai có mặt trong org, role `member`/`admin` và invitation. Phạm vi khác chỉ đọc qua `data "github_membership"` như [`access/`](../access/README.md); không khai báo lại resource này.
+
+| Đối tượng GitHub | Phạm vi sở hữu |
+| --- | --- |
+| Org membership, org role, invitation | `identity/` |
+| Team, team membership | `access/` |
+| Repository, repository ruleset | `repositories/` |
+| Quyền team trên repo, outside collaborator | Chưa chốt; không đặt trong `identity/` |
+
+**Thứ tự apply.** Thêm người: `identity` (invite) → người nhận accept → `access` → `repositories`. Xóa người: theo chiều ngược lại, gỡ khỏi `access` trước khi xóa trong `identity`; nếu không, GitHub tự gỡ team membership và plan tiếp theo của `access` lỗi vì không còn org membership. Nâng ai lên `admin` thì cùng lúc đổi team role của họ trong `access` thành `maintainer` (precondition của `access`).
+
+**Không tự khóa org.**
+- Không đưa tài khoản sở hữu PAT vào `members`. `poc.py preflight` và `poc.py plan` dừng nếu có.
+- Giữ ít nhất hai Owner ngoài state này để khôi phục khi IaC lỗi.
+- Owner/member đã tồn tại phải `terraform import` (`ORG:USERNAME`) trước khi thêm vào `members`; không apply từ state rỗng.
+
+**Trước khi dùng ngoài PoC.**
+- Commit danh sách `members` để review qua PR. Hiện danh sách nằm trong `terraform.tfvars.json` bị gitignore, và `poc.py` từ chối `*.auto.tfvars*`, nên cần cập nhật script khi đổi cách khai báo.
+- Chuyển state sang remote backend có locking, với key riêng cho `identity/`.
+- Dùng credential chỉ có quyền Members cho phạm vi này, và yêu cầu approval cho mọi thay đổi role `admin`.
+- Thống nhất tên biến org giữa các phạm vi (`identity/` và `repositories/` dùng `organization`, `access/` dùng `github_org`).
+- Nếu org chuyển sang SSO/SCIM (EMU), IdP sẽ quản lý membership; khi đó ngừng `identity/`, không chạy song song.
+
 ## Lưu ý
 
 - `admin` trong resource tương đương Organization owner.
