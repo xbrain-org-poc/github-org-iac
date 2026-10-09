@@ -1,0 +1,6 @@
+# Runs from scripts/poc.py and scripts/lifecycle.py are local and may contain
+# state, plan and org/user data. Only curated evidence is committed.
+evidence/*
+!evidence/README.md
+!evidence/logs/
+!evidence/screenshots/
