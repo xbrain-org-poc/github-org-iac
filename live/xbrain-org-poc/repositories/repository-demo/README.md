@@ -1,6 +1,6 @@
 # PoC quản lý GitHub repository bằng Terraform
 
-**Organization:** [xbrain-org-poc](https://github.com/xbrain-org-poc) · **Ngày kiểm chứng:** 30/09/2026 · **Gói:** GitHub Free
+**Organization:** [xbrain-org-poc](https://github.com/xbrain-org-poc) · **Gói:** GitHub Free
 
 Thư mục này là Terraform root và state riêng cho repo public [repository-demo](https://github.com/xbrain-org-poc/repository-demo). Terraform đã tạo và quản lý repo này; organization được tạo thủ công và ruleset được áp dụng ở cấp repository. Evidence PoC ban đầu được giữ cùng cấu hình.
 
@@ -22,7 +22,12 @@ Thư mục này là Terraform root và state riêng cho repo public [repository-
 | Phát hiện và khôi phục drift | Tắt Issues ngoài Terraform; plan thấy `false -> true`; apply bật lại; plan cuối `No changes` | [Drift plan](docs/evidence/demo/11-drift-plan.txt) · [Apply](docs/evidence/demo/13-drift-apply.txt) · [Plan cuối](docs/evidence/demo/27-post-merge-plan.txt) |
 | Ruleset bảo vệ `main` | Active, yêu cầu PR và 1 approval, chỉ squash, không có bypass | [Rule từ GitHub API](docs/evidence/demo/05-main-rules.json) · [Ảnh cấu hình](docs/evidence/demo/22-ruleset-review.jpg) |
 | Kiểm tra hành vi rule | Ghi trực tiếp `main` bị từ chối HTTP 409; [PR demo #1](https://github.com/xbrain-org-poc/repository-demo/pull/1) bị chặn trước review, sau đó `hofang42` approve và merge; nhánh demo được xóa | [Lỗi direct push](docs/evidence/demo/17-direct-main-rejected.txt) · [PR trước review](docs/evidence/demo/16-pr-review-status.json) · [PR đã merge](docs/evidence/demo/23-pr-merged.json) |
-| Mở rộng cấu hình repo (09/10/2026) | Thêm topics `github-iac`, `poc`, `terraform`; Actions chỉ cho phép GitHub-owned actions; tạo environment `dev` với variable không nhạy cảm `POC_ENVIRONMENT=dev`. Apply `3 added, 1 changed, 0 destroyed`; plan sau apply không còn thay đổi | [Plan](docs/evidence/extension-2026-10-09/plan.txt) · [GitHub API](docs/evidence/extension-2026-10-09/) · [Plan sau apply](docs/evidence/extension-2026-10-09/post-apply-plan.txt) |
+| Quản lý topics | Trong [`github_repository.demo`](main.tf), khai báo `topics = ["github-iac", "poc", "terraform"]`. Terraform cập nhật metadata của repo hiện hữu; API trả về đúng ba topics này. | [Plan](docs/evidence/repository-settings-extension/plan.txt) · [Repository API](docs/evidence/repository-settings-extension/repository.json) |
+| Quản lý quyền GitHub Actions | [`github_actions_repository_permissions.demo`](actions.tf) bật Actions và đặt `allowed_actions = "selected"`. GitHub cho phép Actions/workflow nội bộ `xbrain-org-poc` cùng với GitHub-owned actions; không chọn verified third-party actions hoặc pattern bổ sung. Trang Settings và API xác nhận chính sách đã được lưu. Chưa chạy workflow để thử hành vi chặn action. | [Actions permissions](docs/evidence/repository-settings-extension/actions-permissions.json) · [Selected actions](docs/evidence/repository-settings-extension/selected-actions.json) |
+| Quản lý environment và variable | [`github_repository_environment.dev`](actions.tf) tạo environment `dev`; [`github_actions_environment_variable.dev_poc_environment`](actions.tf) tạo `POC_ENVIRONMENT=dev` trong environment đó. Đây là variable thường để chứng minh IaC tạo/cập nhật cấu hình deployment, không phải secret; chưa có workflow hoặc protection rule cho deployment. | [Environments API](docs/evidence/repository-settings-extension/environments.json) · [Variable API](docs/evidence/repository-settings-extension/dev-variables.json) |
+| Kiểm tra cấu hình mở rộng | Plan dự kiến **thêm 3 resource** (Actions permissions, environment, variable) và **cập nhật 1 resource** (topics của repo), không xóa resource. Apply hoàn tất `3 added, 1 changed, 0 destroyed`. Plan sau apply báo `No changes`, cho thấy cấu hình trong state khớp với GitHub tại thời điểm kiểm tra. | [Plan trước apply](docs/evidence/repository-settings-extension/plan.txt) · [Plan sau apply](docs/evidence/repository-settings-extension/post-apply-plan.txt) |
+
+Các resource trong `actions.tf` tham chiếu `github_repository.demo.name`, nên đều cấu hình cho cùng `repository-demo`. Variable tham chiếu tên từ `github_repository_environment.dev`, vì vậy Terraform tạo environment trước khi tạo variable trong đó.
 
 ## Ảnh bằng chứng chính
 
@@ -52,7 +57,7 @@ Thư mục này là Terraform root và state riêng cho repo public [repository-
 - [`actions.tf`](actions.tf): quyền Actions, environment `dev` và variable mẫu.
 - [`provider.tf`](provider.tf): Terraform và GitHub provider.
 - [`variables.tf`](variables.tf), [`outputs.tf`](outputs.tf): tham số và URL đầu ra.
-- [Hướng dẫn chạy/import state](docs/huong-dan-chay.md); [evidence ban đầu](docs/evidence/demo/) và [evidence mở rộng](docs/evidence/extension-2026-10-09/).
+- [Hướng dẫn chạy/import state](docs/huong-dan-chay.md); [evidence ban đầu](docs/evidence/demo/) và [evidence mở rộng](docs/evidence/repository-settings-extension/).
 
 State và binary plan lưu local, không commit. Repository và ruleset ban đầu đã được chuyển từ state PoC dùng chung sang state riêng trong thư mục này; các resource Actions/environment được thêm sau. Bản clone mới phải import mọi resource đã tồn tại theo [hướng dẫn](docs/huong-dan-chay.md) trước khi plan/apply.
 
