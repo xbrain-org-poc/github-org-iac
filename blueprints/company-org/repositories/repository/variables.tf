@@ -4,9 +4,10 @@ variable "organization" {
   nullable    = false
 }
 
-variable "repositories" {
-  description = "Repositories owned by this operational group. Map key is the GitHub repository name."
-  type = map(object({
+variable "repository" {
+  description = "The GitHub repository managed by this Terraform root."
+  type = object({
+    name               = string
     description        = string
     visibility         = string
     has_issues         = optional(bool, true)
@@ -15,15 +16,14 @@ variable "repositories" {
     allow_squash_merge = optional(bool, true)
     allow_merge_commit = optional(bool, false)
     allow_rebase_merge = optional(bool, false)
-  }))
+  })
   nullable = false
 
   validation {
-    condition = alltrue([
-      for name, repo in var.repositories :
-      contains(["private", "public", "internal"], repo.visibility) &&
-      (repo.allow_squash_merge || repo.allow_merge_commit || repo.allow_rebase_merge)
-    ])
-    error_message = "Every repository needs a valid visibility and at least one merge method."
+    condition = (
+      contains(["private", "public", "internal"], var.repository.visibility) &&
+      (var.repository.allow_squash_merge || var.repository.allow_merge_commit || var.repository.allow_rebase_merge)
+    )
+    error_message = "Repository needs a valid visibility and at least one merge method."
   }
 }
