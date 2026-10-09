@@ -6,6 +6,7 @@ Repository tập trung mã Terraform quản lý GitHub Organization `xbrain-org-
 | --- | --- | --- |
 | [`live/xbrain-org-poc/identity/`](live/xbrain-org-poc/identity/) | Thành viên org và role qua `github_membership` | Đã chuyển mã và bằng chứng PoC từ [`poc-member`](https://github.com/xbrain-org-poc/poc-member); hiện không quản lý thành viên nào |
 | [`live/xbrain-org-poc/access/`](live/xbrain-org-poc/access/) | Team, thành viên team, quyền team trên repo | Chưa chuyển mã; chờ kết quả PoC team và cấu hình được thống nhất |
+| [`live/xbrain-org-poc/org-policies/`](live/xbrain-org-poc/org-policies/) | Ruleset cấp organization nhắm tới nhiều repo | Đã khai báo và thử apply; GitHub từ chối, chưa có ruleset mới |
 | [`live/xbrain-org-poc/repositories/`](live/xbrain-org-poc/repositories/) | Repository settings và repository rulesets | Đã chuyển mã, state local và bằng chứng PoC từ [`iac-repository-management-poc`](https://github.com/xbrain-org-poc/iac-repository-management-poc) |
 | [`modules/`](modules/) | Module dùng lại khi nhiều resource có cùng chính sách | Chưa cần module trong PoC |
 
@@ -14,6 +15,7 @@ Repository tập trung mã Terraform quản lý GitHub Organization `xbrain-org-
 - **Repository:** Terraform tạo và cập nhật [`repository-demo`](https://github.com/xbrain-org-poc/repository-demo), phát hiện và khôi phục drift, áp dụng ruleset yêu cầu PR và một approval. [Code, ảnh và log](live/xbrain-org-poc/repositories/README.md).
 - **Member:** Terraform đã thử invitation, thay đổi role, drift, import và xóa thành viên thử nghiệm. State cuối đã dọn sạch. [Code, ảnh và log](live/xbrain-org-poc/identity/README.md).
 - **Team/access:** Chưa có kết quả để xác nhận. Thư mục riêng giữ ranh giới quản lý; xem [phạm vi còn thiếu](live/xbrain-org-poc/access/README.md).
+- **Org ruleset:** Đã thêm [cấu hình và kết quả thử](live/xbrain-org-poc/org-policies/README.md) cho hai repo. GitHub từ chối request tạo ruleset; gói Free hiện tại không hỗ trợ tính năng này.
 
 ## Vận hành an toàn
 
