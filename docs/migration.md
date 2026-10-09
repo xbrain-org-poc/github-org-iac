@@ -5,4 +5,5 @@
 - Người clone repo mới không nhận được state local. Trước khi `plan/apply`, import các GitHub resource đang tồn tại theo [`huong-dan-chay.md`](../live/xbrain-org-poc/repositories/docs/huong-dan-chay.md); đối chiếu ID ruleset hiện tại từ GitHub API.
 - `identity/` không có active membership trong state cuối PoC; không sao chép state cũ. Chỉ thêm username đã được chấp thuận vào tfvars local sau khi kiểm tra org hiện tại.
 - `access/` chưa có code team được bàn giao. Không chạy Terraform trong thư mục này.
+- `org-policies/` là Terraform root riêng. Ruleset cấp org được khai báo nhưng chưa tạo được vì org đang dùng GitHub Free; không chia sẻ state với `repositories/`.
 - Pipeline PR plan/apply cần remote backend có locking, credential giới hạn quyền và chính sách approval. Thư mục workflow hiện chỉ ghi trạng thái này, chưa tự động thực thi.
