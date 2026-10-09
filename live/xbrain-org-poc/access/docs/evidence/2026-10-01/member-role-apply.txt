@@ -1,0 +1,26 @@
+﻿github_team_membership.member["devops:phuc776"]: Modifying... [id=19806617:Phuc776]
+github_team_membership.member["devops:phuc776"]: Modifications complete after 2s [id=19806617:Phuc776]
+
+Apply complete! Resources: 0 added, 1 changed, 0 destroyed.
+
+Outputs:
+
+team_memberships = {
+  "devops:phuc-do-v2" = {
+    "role" = "maintainer"
+    "team_id" = "19806617"
+    "username" = "phuc-do-v2"
+  }
+  "devops:phuc776" = {
+    "role" = "maintainer"
+    "team_id" = "19806617"
+    "username" = "Phuc776"
+  }
+}
+teams = {
+  "devops" = {
+    "id" = "19806617"
+    "slug" = "poc-infra-maintainers"
+    "url" = "https://github.com/orgs/xbrain-org-poc/teams/poc-infra-maintainers"
+  }
+}

@@ -1,0 +1,38 @@
+﻿data.github_membership.existing["phuc-do-v2"]: Reading...
+github_team.root["devops"]: Refreshing state... [id=19806617]
+data.github_membership.existing["phuc-do-v2"]: Read complete after 1s [id=xbrain-org-poc:phuc-do-v2]
+github_team_membership.member["devops:phuc-do-v2"]: Refreshing state... [id=19806617:phuc-do-v2]
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  ~ update in-place
+
+Terraform will perform the following actions:
+
+  # github_team.root["devops"] will be updated in-place
+  ~ resource "github_team" "root" {
+      ~ description               = "Task B sandbox team managed by Terraform" -> "Maintains shared infrastructure in the Task B sandbox"
+        id                        = "19806617"
+      ~ name                      = "poc-devops" -> "poc-infra-maintainers"
+      ~ notification_setting      = "notifications_enabled" -> "notifications_disabled"
+      ~ slug                      = "poc-devops" -> (known after apply)
+        # (8 unchanged attributes hidden)
+    }
+
+Plan: 0 to add, 1 to change, 0 to destroy.
+
+Changes to Outputs:
+  ~ teams            = {
+      ~ devops = {
+            id   = "19806617"
+          ~ slug = "poc-devops" -> (known after apply)
+          ~ url  = "https://github.com/orgs/xbrain-org-poc/teams/poc-devops" -> (known after apply)
+        }
+    }
+
+─────────────────────────────────────────────────────────────────────────────
+
+Saved the plan to: task-b-update.tfplan
+
+To perform exactly these actions, run the following command to apply:
+    terraform apply "task-b-update.tfplan"
