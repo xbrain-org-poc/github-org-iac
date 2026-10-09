@@ -1,0 +1,9 @@
+# Reference values only. Replace after inventory and owner approval.
+organization = "ORG_DICH"
+
+repositories = {
+  "example-service" = {
+    description = "Example repository owned by this group"
+    visibility  = "private"
+  }
+}

@@ -1,0 +1,6 @@
+# Reference values only. Review target coverage before enabling enforcement.
+organization             = "ORG_DICH"
+enforcement              = "evaluate"
+repository_name_patterns = ["~ALL"]
+excluded_repository_names = []
+required_approvals       = 1
